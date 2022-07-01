@@ -1,6 +1,6 @@
 # nexscrap-classified
 
-**Description** : Web-Application to Buy/Sell Scrap Items
+**Description** : Web Application to Buy/Sell Scrap Items
 
 **Requisite** : Make sure you have Python3 and Pip installed in your System
 
