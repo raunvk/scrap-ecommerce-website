@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Nexscrap - Register</title>
+
+    <link rel="icon" href="{% static 'img/logo.png' %}"  type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/line-icons.css' %}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+      
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body{
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg,#ffffff, #a9a9a9);
+        height: 100vh;
+        overflow: hidden;
+      }
+      .center{
+        position: absolute;
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+      }
+      .center h1{
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #a9a9a9;
+      }
+      .center form{
+        padding: 0 40px;
+        box-sizing: border-box;
+      }
+      form .txt_field{
+        position: relative;
+        border-bottom: 2px solid #a9a9a9;
+        margin: 30px 0;
+      }
+      .txt_field input{
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        background: none;
+        outline: none;
+      }
+      .txt_field label{
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        color: #a9a9a9;
+        transform: translateY(-50%);
+        font-size: 16px;
+        pointer-events: none;
+        transition: .5s;
+      }
+      .txt_field span::before{
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: #01cc67;
+        transition: .5s;
+      }
+      .txt_field input:focus ~ label,
+      .txt_field input:valid ~ label{
+        top: -5px;
+        color: #01cc67;
+      }
+      .txt_field input:focus ~ span::before,
+      .txt_field input:valid ~ span::before{
+        width: 100%;
+      }
+      .pass{
+        margin: -5px 0 20px 5px;
+        color: #a9a9a9;
+        cursor: pointer;
+      }
+      .pass:hover{
+        text-decoration: underline;
+      }
+      input[type="submit"]{
+        width: 100%;
+        height: 50px;
+        border: 1px solid;
+        background: #01cc67;
+        border-radius: 25px;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 700;
+        cursor: pointer;
+        outline: none;
+      }
+      input[type="submit"]:hover{
+        background-color: #02ab55;
+        transition: .5s;
+      }
+      .signup_link{
+        margin: 30px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #a9a9a9;
+      }
+      .signup_link a{
+        color: #01cc67;
+        text-decoration: none;
+      }
+      .signup_link a:hover{
+        text-decoration: underline;
+      }
+      h1{
+        color: #01cc67;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="center" style="padding-bottom: 10px;">
+      <h1>REGISTER</h1>
+      {% if messages %}
+      {% for message in messages%}
+      <br>
+      <p style="color:red; padding-left: 40px; font-size: 16px;"><b>{{message}}</b></p>
+      {% endfor %}
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <div class="txt_field">
+          <input type="text" name="username" id="username" required>
+          <label><i class="fa fa-user"></i> <b>Username</b></label>
+          <span></span>
+        </div>
+        <div class="txt_field">
+            <input type="email" name="email" id="email" required>
+            <label><i class="fa fa-envelope"></i> <b>Email</b></label>
+            <span></span>
+        </div>
+        <div class="txt_field">
+          <input type="password" name="password" id="password" required>
+          <label><i class="fa fa-key"></i> <b>Password</b></label>
+          <span></span>
+        </div>
+        <div class="txt_field">
+            <input type="password" name="confirm_password" id="confirm_password" required>
+            <label><i class="fa fa-key"></i> <b>Confirm Password</b></label>
+            <span></span>
+        </div>
+        <div class="txt_field">
+            <input type="text" name="phone_field" id="phone_field" required>
+            <label><i class="fa fa-phone"></i> <b>Phone</b></label>
+            <span></span>
+        </div>
+  
+        <input type="submit" value="SUBMIT" style="border-radius:10px">
+
+        <br><br>
+      </form>
+      <div>
+        <p style="padding-left: 40px; padding-bottom:15px; color: #a9a9a9; font-size: 16px;"><b><i class="fa fa-arrow-left"></i> Go Back</b> <a href="{% url 'index' %}" style="color:#01cc67;"><b> Home</b></a></p>
+      </div>
+    </div>
+
+  </body>
+</html>

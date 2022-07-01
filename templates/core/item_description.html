@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Nexcrap - Item Description</title>
+
+    <link rel="icon" href="{% static 'img/logo.png' %}"  type="image/x-icon">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/line-icons.css' %}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+        
+        body {
+            box-sizing: border-box;
+            background: linear-gradient(120deg,#ffffff, #a9a9a9);
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Poppins", sans-serif;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .outer {
+            position: relative;
+            background: #ffffff;
+            height: 550px;
+            width: 850px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+        }
+
+        img {
+            
+            position: absolute;
+            top: 100px;
+            right: -10px;
+            z-index: 0;
+            padding-right: 35px;
+            
+        }
+
+        .content {
+            animation-delay: 0.3s;
+            position: absolute;
+            left: 20px;
+            z-index: 3
+            
+        }
+
+        h1 {
+            color: #363636;
+            text-transform: uppercase;
+            font-size: 30px;
+        }
+
+        p {
+            width: 280px;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #939393;
+            margin: 20px 0;
+            
+        }
+
+        .bg {
+            display: inline-block;
+            color: #ffffff;
+            background: #01cc67;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: .7em;
+        }
+
+        .button {
+            width: fit-content;
+            height: fit-content;
+            margin-top: 10px; 
+            margin-bottom: -5px;   
+        }
+
+        .button a {
+            display: inline-block;
+            overflow: hidden;
+            position: relative;
+            font-size: 11px;
+            color: #01cc67;
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid #939393;
+            font-weight: bold;
+        }
+
+        .button a:after{
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -10px;
+            width: 0%;
+            background: #01cc67;
+            height: 100%;
+            z-index: -1;
+            transition: width 0.3s ease-in-out;
+            transform: skew(-25deg);
+            transform-origin: right;
+        }
+
+        .button a:hover:after {
+            width: 150%;
+            left: -10px;
+            transform-origin: left;
+            
+        }
+
+        .button a:hover {
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+
+        .button a:nth-of-type(1) {
+            border-radius: 8px 0 0 8px;
+            border-right: none;
+        }
+
+        .button a:nth-of-type(2) {
+            border-radius: 0px 8px 8px 0;
+        }
+
+        .cart-icon {
+            padding-right: 8px;
+            
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="wrapper">
+        <div class="outer">
+            <div class="content animated fadeInLeft" style="padding-left: 5px;">
+                <span class="bg animated fadeInDown" style="font-size: 16px;"><b>Posted By : {{product.poster}}</b></span>
+                
+                <h1 style="padding-top: 40px;">{{product.name}}</h1>
+                <p style="font-size: 16px; padding-top: 20px;"><i class="fa fa-list-ul"></i> <b>{{product.category}}</b></p>
+                <p style="font-size: 16px;"><i class="fa fa-shopping-bag"></i> <b>Net {{product.quantity}}kg</b></p>
+                <p style="font-size: 16px;"><i class="fa fa-pencil-square-o"></i> <b>{{product.description}}</b></p>
+                <!--<p style="font-size: 16px;"><i class="fa fa-map-marker"></i> <b>{{product.address}}, {{product.city}} {{product.zip_code}}</b></p>
+                <p style="font-size: 16px;"><i class="fa fa-phone"></i> <b>{{product.phone}}</b></p>-->
+                <p style="font-size: 16px;"><i class="fa fa-map-marker"></i> <b>{{product.city}}</b></p>
+                <p style="font-size: 16px;"><i class="fa fa-money"></i> <b>Total Price ₹{% widthratio product.quantity 1 product.price %}</b></p>
+                <p style="font-size: 16px;"><i class="fa fa-arrow-left"></i> <b>Go</b> <a href="{% url 'index' %}" style="color:#01cc67;"><b>Home</b></a></p><br>
+                <div class="button">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'add_to_cart' product.pk %}" style="font-size: 18px;">₹{{product.price}}/kg</a><a class="cart-btn" href="{% url 'add_to_cart' product.pk %}" style="font-size: 18px;"><i class="fa fa-cart-plus"></i> Add to Cart</a>
+                    {% else %}
+                    <a href="{% url 'user_login' %}" style="font-size: 18px;">₹{{product.price}}/kg</a><a class="cart-btn" href="{% url 'user_login' %}" style="font-size: 18px;"><i class="fa fa-cart-plus"></i> Add to Cart</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                {% if product.image %}
+                <a href="{% url 'item_image' product.pk %}" target="_blank">
+                    <img src="{{product.image.url}}" alt="No Image" width="465px" height="350px" class="animated fadeInRight">
+                </a>
+                {% else %}
+                <a href="{% url 'item_image' product.pk %}" target="_blank">
+                    <img src="{% static 'img/noimage.png' %}" alt="No Image" width="465px" height="350px" class="animated fadeInRight">
+                </a>
+                {% endif %}
+                <div style="padding-left: 595px; padding-top: 415px;">
+                    {% if messages %}
+                    {% for message in messages%}
+                    <br>
+                    <p style="color:red; font-size: 16px;"><b>{{message}}</b></p>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</body>
+</html>
+    

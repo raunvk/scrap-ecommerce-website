@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Nexcrap - Item Image</title>
+
+    <link rel="icon" href="{% static 'img/logo.png' %}"  type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/line-icons.css' %}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+      body{
+        background: #000000;
+      }
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 950px;
+      }
+      img {
+        width: 71%;
+        height: 95%;
+      }
+    </style>
+</head>
+<body>
+    <div >
+        {% if product.image %}
+        <img src="{{product.image.url}}" alt="No Image">
+        {% else %}
+        <img src="{% static 'img/noimage.png' %}" alt="No Image">
+        {% endif %}
+    </div>
+</body>
+</html>

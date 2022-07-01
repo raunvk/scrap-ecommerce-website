@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+{% load static %}
+{% load cart_template_tag %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Nexscrap - Buy And Sell Scrap</title>
+
+    <link rel="icon" href="{% static 'img/logo.png' %}"  type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/line-icons.css' %}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+      *{
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+      }
+      body{
+          font-family: 'Roboto', sans-serif;
+      }
+      a{
+          text-decoration: none;
+      }
+      .product-card{
+          width: 400px;
+          position: relative;
+          box-shadow: 0 5px 5px #939393;
+          margin: 50px 0px 0px 68px;
+          background: #ffffff;
+      }
+      .product-tumb{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 300px;
+          padding: 50px;
+          background: #f5f5f5;
+      }
+      .product-tumb img{
+          max-width: 100%;
+          max-height: 100%;
+      }
+      .product-details{
+          padding: 30px;
+      }
+      .product-info{
+          font-size: 15px;
+          color: #939393;
+          margin-bottom: 18px;
+      }
+      .product-details h4 a{
+          font-weight: 600;
+          font-size: 30px;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+          color: #363636;
+          text-decoration: none;
+          transition: 0.3s;
+      }
+      .product-details h4 a:hover{
+          color: #02ab55;
+      }
+      .product-info p{
+          font-weight: 500;
+          font-size: 15px;
+          color: #939393;
+          margin-bottom: 18px;
+      }
+      .product-bottom-details{
+          overflow: hidden;
+          border-top: 1px solid #939393;
+          padding-top: 20px;
+      }
+      .product-bottom-details div{
+          float: left;
+          width: 50%;
+      }
+      .product-price{
+          font-size: 18px;
+          color: #01cc67;
+          font-weight: 600;
+      }
+      .product-price small{
+          font-size: 80%;
+          font-weight: 400;
+          text-decoration: line-through;
+          display: inline-block;
+          margin-right: 5px;
+      }
+      .product-links{
+          text-align: right;
+      }
+      .product-links a{
+          display: inline-block;
+          margin-left: 5px;
+          color: #ffffff;
+          transition: 0.3s;
+          font-size: 17px;
+      }
+      .product-links a:hover{
+          color: #02ab55;
+      }
+      img:hover {
+          cursor: pointer;
+      }
+      button:hover{
+        background-color: #02ab55;
+      }
+      p {
+        text-align: center;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap">
+      <!-- Navbar Start -->
+      <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="lni-menu"></span>
+              <span class="lni-menu"></span>
+              <span class="lni-menu"></span>
+            </button>
+            <a href="{% url 'index' %}" class="navbar-brand"><img src="{% static 'img/logo1.png' %}" alt="No Image"></a>
+          </div>
+          <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav mr-auto">
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="tg-btn" href="{% url 'user_logout' %}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sign-out"></i> 
+                  <b>Logout</b>
+                </a>
+              </li>
+
+              {% else %}
+              <li class="nav-item">
+                <a class="tg-btn" href="{% url 'user_register' %}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-plus"></i> 
+                  <b>Register</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="tg-btn" href="{% url 'user_login' %}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sign-in"></i> 
+                  <b>Login</b>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+            {% if user.is_authenticated %}
+            <a class="tg-btn" href="{% url 'order_list' %}">
+              <i class="fa fa-shopping-cart"></i> <b>View Cart</b> <span style="color:red"><b>{{request.user | cart_item_count}}</b></span>
+            </a>
+            {% else %}
+            <a class="tg-btn" href="{% url 'user_login' %}">
+              <i class="fa fa-shopping-cart"></i> <b>View Cart</b>
+            </a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a class="tg-btn" href="{% url 'add_item' %}">
+              <i class="fa fa-plus-square"></i> <b>Add Item</b>
+            </a>
+            {% else %}
+            <a class="tg-btn" href="{% url 'user_login' %}">
+              <i class="fa fa-plus-square"></i> <b>Add Item</b>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+
+      </nav>
+      <!-- Navbar End -->
+
+      <!-- Hero Area Start -->
+      <div id="hero-area">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12 text-center">
+              <div class="contents">
+                
+                <h1 class="head-title">Welcome to <span class="year">Nexscrap</span></h1>
+                {% if user.is_authenticated %}
+                <p style="font-size: 16px;"><b>Hello <span style="color:#01cc67; text-transform:capitalize; font-size: 18px;">{{user.username}}</span>, Buy And Sell Scrap Items From The Comfort Of Your Home!</b></p>
+                {% else %}
+                <p style="font-size: 16px;"><b>Hello <span style="color:#01cc67; font-size:18px;">User</span>, Buy And Sell Scrap Items From The Comfort Of Your Home!</b></p>
+                {% endif %}
+                <div class="container" style="display: flex; justify-content: center;">
+                  <div class="search-bar" style="width: 800px; position:absolute;">
+                    <fieldset>
+
+                      <form class="search-form" action="/search">
+                        <div class="form-group tg-inputwithicon">
+                          <i class="lni-tag"></i>
+                          <input type="text" name="title" class="form-control" placeholder="Search Here">
+                        </div>
+                        <button class="btn btn-common" type="submit"><i class="lni-search"></i></button>
+                      </form>
+
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Hero Area End -->
+
+    </header>
+    <!-- Header Area wrapper End -->
+    
+    <!-- Featured Section Start -->
+    
+    <div class="row" style="padding-bottom: 50px;">
+
+      {% for product in products %}
+      {% if product.available %}
+      <div class="product-card">
+        <div class="product-tumb">
+          {% if product.image %}
+            <a href="{% url 'item_description' product.pk %}">
+              <img src="{{product.image.url}}" alt="No Image">
+            </a>
+          {% else %}
+          <a href="{% url 'item_description' product.pk %}">
+            <img src="{% static 'img/noimage.png' %}" alt="No Image">
+          </a>
+          {% endif %}
+        </div>
+        <div class="product-details">
+          <span class="product-info"><i class="fa fa-map-marker"></i> <b>{{product.city}}</b></span>
+          <h4><a href="{% url 'item_description' product.pk %}">{{product.name}}</a></h4>
+          <div class="product-bottom-details">
+            <div class="product-price">₹{{product.price}}/kg</div>
+            <div class="product-links">
+              <a class="tg-btn" href="{% url 'item_description' product.pk %}" style="font-size: 15px;">
+                <i class="fa fa-eye"></i> <b>View More</b>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      {% if messages %}
+      {% for message in messages%}
+      <br>
+      <div class="container">
+        <p style="color:red; font-size: 25px; padding-top: 65px;"><b>{{message}} <i class="fa fa-frown-o"></i></b></p>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+    </div>
+    <!-- Featured Section End -->
+      
+      <!-- Copyright Start  -->
+      <div id="copyright">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div>
+                <p>All copyrights reserved &copy; 2022 - Designed by <a rel="nofollow">Nexscrap Pvt. Ltd.</a></p>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright End -->
+
+    </footer>
+    <!-- Footer Section End --> 
+
+    <!-- Go to Top Link -->
+    <a href="#" class="back-to-top">
+    	<i class="lni-chevron-up"></i>
+    </a>
+
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader" id="loader-1"></div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+  </body>
+</html>

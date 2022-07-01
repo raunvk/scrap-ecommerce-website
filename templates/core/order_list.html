@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Nexscrap - Order List</title>
+
+    <link rel="icon" href="{% static 'img/logo.png' %}"  type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/line-icons.css' %}">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slicknav.css' %}">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      table{
+            font-size: 15px;
+            font-weight: 500;
+            color: #000000;
+        }
+
+      thead{
+        background-color: #363636;
+        color: #ffffff;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap" style="padding-bottom: 100px;">
+      <!-- Navbar Start -->
+      <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="lni-menu"></span>
+              <span class="lni-menu"></span>
+              <span class="lni-menu"></span>
+            </button>
+            <a href="{% url 'index' %}" class="navbar-brand"><img src="{% static 'img/logo1.png' %}" alt=""></a>
+          </div>
+          <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav mr-auto">
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="tg-btn" href="{% url 'user_logout' %}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sign-out"></i> 
+                  <b>Logout</b>
+                </a>
+              </li>
+
+              {% else %}
+              <li class="nav-item">
+                <a class="tg-btn" href="{% url 'user_register' %}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-plus"></i> 
+                  <b>Register</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="tg-btn" href="{% url 'user_login' %}" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sign-in"></i> 
+                  <b>Login</b>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+            <a class="tg-btn" href="{% url 'index' %}">
+              <i class="fa fa-home"></i> <b>Go Home</b>
+            </a>
+            
+          </div>
+        </div>
+
+      </nav>
+      <!-- Navbar End -->
+    </header>
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"><span style="color:#363636">#</span></th>
+          <th scope="col">#</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Price/kg</th>
+          <th scope="col">Quatity</th>
+          <th scope="col">Item Price</th>
+          <th scope="col">Remove</th>
+
+        </tr>
+      </thead>
+      
+      <tbody>
+        {% for order_item in order.items.all %}
+        <tr>
+          <th scope="row"><b><span style="color:#f2f2f2">{{ forloop.counter }}</span></b></th>
+          <th scope="row"><b>{{ forloop.counter }}</b></th>
+          <td><b>{{ order_item.product.name }}</b></td>
+          <td><b>{{ order_item.product.category }}</b></td>
+          <td><b>₹{{ order_item.product.price }}</b></td>
+          <td><b>{{ order_item.product.quantity }}kg</b></td>
+          <td><b>₹{{ order_item.get_total_item_price }}</b></td>
+          <td><a href="{% url 'remove_from_cart' order_item.product.pk %}"><span style="color:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash"></i></span></a></td>
+        </tr>
+
+        {% empty %}
+        <tr class="row100 body">
+          <td class="cell100 column1"><span style="color:#f2f2f2">#</span></td>
+          <td class="cell100 column2"><span style="color:#f2f2f2">#</span></td>
+          <td class="cell100 column3"><span style="color:#f2f2f2">Item Name</span></td>
+          <td class="cell100 column4"><span style="color:#f2f2f2">Category</span></td>
+          <td class="cell100 column5"><b><span style="color:red"><i class="fa fa-eye-slash"></i> Empty!</span></b></td>
+          <td class="cell100 column6"><span style="color:#f2f2f2">Quatity</span></td>
+          <td class="cell100 column7"><span style="color:#f2f2f2">Item Price</span></td>
+          <td class="cell100 column8"><span style="color:#f2f2f2">Remove</span></td>
+  
+        </tr>
+        
+
+        {% endfor %}
+
+        {% if order.get_total_price %}
+        <tr class="row100 body" style="background-color:#363636;">
+          <td class="cell100 column1"><span style="color: #363636";><i class="fa fa-shopping-bag"></i></span></td>
+          <td class="cell100 column2"><span style="color: #ffffff";><i class="fa fa-shopping-bag"></i></span></td>
+          <td class="cell100 column3" style="color: #ffffff;"><b>Total Price</b></td>
+          <td class="cell100 column4"></td>
+          <td class="cell100 column5"></td>
+          <td class="cell100 column6"></td>
+          <td class="cell100 column7" style="color:#ffffff;">₹{{ order.get_total_price }}</td>
+          <td class="cell100 column8"></td>
+        </tr>
+
+        <tr class="row100 body" style="background-color:#f2f2f2;">
+          <td class="cell100 column1"><span style="color: #f2f2f2";><i class="fa fa-cogs"></i></span></td>
+          <td class="cell100 column2"><i class="fa fa-cogs"></i></td>
+          <td class="cell100 column3"><b>Processing Fee</b></td>
+          <td class="cell100 column4"></td>
+          <td class="cell100 column5"></td>
+          <td class="cell100 column6"></td>
+          <td class="cell100 column7"><b>₹{{ order.get_process_fee }}</b></td>
+          <td class="cell100 column8"></td>
+        </tr>
+
+        <tr class="row100 body" style="background-color:#363636;">
+          <td class="cell100 column1" style="color:#363636;"><i class="fa fa-money"></i></td>
+          <td class="cell100 column2" style="color:#ffffff;"><i class="fa fa-money"></i></td>
+          <td class="cell100 column3" style="color:#ffffff;"><b>Grand Total</b></td>
+          <td class="cell100 column4"></td>
+          <td class="cell100 column5"></td>
+          <td class="cell100 column6"></td>
+          <td class="cell100 column7" style="color:#ffffff;"><b>₹{{ order.get_grand_total }}</b></td>
+          <td class="cell100 column8"></td>
+        </tr>
+        
+
+      </tbody>
+    </table>
+    <br>
+    <a href="{% url 'checkout_page' %}" class="tg-btn" style = "position:relative; left:1390px; width:120px; height: 35px; font-size: 15px;"><i class="fa fa-sign-out"></i>  <b>Checkout</b></a>
+    {% endif %}
+
+  </body>
