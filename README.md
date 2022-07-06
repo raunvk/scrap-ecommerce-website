@@ -20,7 +20,7 @@
 
 1. Superuser -> Username : admin, Password : admin123
 
-2. User1 -> Useranme : buyer, Password : buyer123
+2. User1 -> Username : buyer, Password : buyer123
 
 3. User2 -> Username : seller, Password : seller123
 
