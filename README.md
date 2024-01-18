@@ -12,9 +12,9 @@
 
 3. Runserver on localhost [**python manage.py runserver**]
 
-4. Go to http://localhost:8000 on your browser to visit **Nexscrap Home**
+4. Go to http://localhost:8000 on your browser to visit Nexscrap Home
 
-5. Go to http://localhost:8000/admin on your browser to visit **Admin Panel**
+5. Go to http://localhost:8000/admin on your browser to visit Admin Panel
 
 **Pre-Existing User Credentials** :
 
