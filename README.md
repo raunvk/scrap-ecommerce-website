@@ -6,10 +6,10 @@
 
 **Overview** :
 
-1. **Django** : Manages CRUD operations for items and users data storage within a database.
-2. **SQLite3 Database** : Provides database storage for items and users information.
-3. **Boostrap** : Renders backend endpoints to support dynamic user interface rendering.
-4. **VanillaJS** : Manages additional functionalities for Twilio and Razorpay integrations.
+1. **Django** : Manages CRUD operations for items and users data storage within a database
+2. **SQLite3 Database** : Provides database storage for items and users information
+3. **Boostrap** : Renders backend endpoints to support dynamic user interface rendering
+4. **VanillaJS** : Manages additional functionalities for Twilio and Razorpay integrations
 
 **How to Run (Windows)** :
 
