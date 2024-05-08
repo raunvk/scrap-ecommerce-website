@@ -1,6 +1,6 @@
 # nexscrap-classified
 
-**Description** : Web Application to Buy/Sell Scrap Items
+**Description** : Web Application to Buy & Sell Scrap Items
 
 **Tech Stack** : Django, SQLite3, Boostrap, VanillaJS
 
