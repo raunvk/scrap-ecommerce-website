@@ -15,7 +15,7 @@
 
 1. Install requirements.txt to install necessary packages [**pip install -r requirements.txt**]
 2. Go to nexscrap -> settings.py -> Edit line nos. 133-138 and add your own Razorpay and Twilio credentials
-3. Runserver on localhost [**python manage.py runserver**]
+3. Run server on localhost [**python manage.py runserver**]
 4. Go to http://localhost:8000 on your browser to visit Nexscrap Home
 5. Go to http://localhost:8000/admin on your browser to visit Admin Panel
 
