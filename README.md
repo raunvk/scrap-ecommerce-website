@@ -2,7 +2,7 @@
 
 **Description** : Web Application to Buy & Sell Scrap Items
 
-**Tech Stack** : Django, SQLite3, Boostrap, VanillaJS
+**Tech Stack** : Django, SQLite3, Bootstrap, VanillaJS
 
 **Overview** :
 
