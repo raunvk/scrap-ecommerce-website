@@ -1,4 +1,4 @@
-# nexscrap-classified
+# scrap-ecommerce-website
 
 **Description** : Web Application to Buy & Sell Scrap Items
 
